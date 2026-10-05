@@ -14,8 +14,15 @@ and have they hit their plan limit?
 - tenants(id, name, plan_id, subscription_status, stripe_customer_id, created_at)
 - plans(id, name, api_call_limit, token_limit)
 - subscriptions(id, tenant_id, stripe_subscription_id, status, current_period_end)
-- usage_events(id, tenant_id, type, quantity, cost_micros, idempotency_key, created_at)
+- usage_events(id, tenant_id, idempotency_key, api_calls, input_tokens,
+  cached_input_tokens, output_tokens, reasoning_tokens, total_tokens,
+  cost_micros, created_at)
   - UNIQUE(tenant_id, idempotency_key)
+  - INDEX(tenant_id, created_at) for monthly rollups
+  - CHECK constraints: api_calls >= 0, total_tokens >= 0
+  - One row per billable request holding both usage types. Token categories
+    are stored separately because they are priced differently. total_tokens is
+    the quota-counted sum, set by the service layer.
 - processed_webhook_events(stripe_event_id PRIMARY KEY, processed_at)
 
 All money is stored as integers in micro-dollars (1 USD = 1,000,000). No floats.

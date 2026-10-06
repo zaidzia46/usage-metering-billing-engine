@@ -16,8 +16,9 @@ def claim_event(db: Session, event_id: str) -> bool:
         insert(ProcessedWebhookEvent)
         .values(stripe_event_id=event_id)
         .on_conflict_do_nothing(index_elements=["stripe_event_id"])
+        .returning(ProcessedWebhookEvent.stripe_event_id)
     )
-    return db.execute(stmt).rowcount == 1
+    return db.execute(stmt).scalar_one_or_none() is not None
 
 
 def get_plan_by_name(db: Session, name: str) -> Plan | None:

@@ -50,4 +50,5 @@ async def stripe_webhook(
             content={"error": "processing_failed", "message": "Will be retried."},
         )
 
+    print(f"WEBHOOK {event.get('type')} {event.get('id')} -> {outcome}")
     return {"status": outcome}

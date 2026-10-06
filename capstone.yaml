@@ -1,0 +1,29 @@
+run: docker compose up -d --wait db && alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000
+seed: docker compose up -d --wait db && alembic upgrade head && python -m app.seed
+test: python -m pytest -q
+base_url: http://localhost:8000
+
+# Seeded tenants: id 1 and id 2, both on the free plan.
+# Tenants are identified by the X-Tenant-Id header (a stand-in for real auth).
+endpoints:
+  - method: GET
+    path: /health
+  - method: GET
+    path: /usage
+    headers:
+      X-Tenant-Id: "1"
+  - method: POST
+    path: /generate
+    headers:
+      X-Tenant-Id: "1"
+      Idempotency-Key: "probe-key-1"
+    body:
+      input_tokens: 1000
+      output_tokens: 500
+  - method: POST
+    path: /checkout
+    headers:
+      X-Tenant-Id: "2"
+  - method: POST
+    path: /webhooks/stripe
+    note: "Needs a valid Stripe-Signature; a request without one must return 400"

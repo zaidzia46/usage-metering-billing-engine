@@ -52,3 +52,6 @@ class UsageResponse(BaseModel):
     api_calls: QuotaLineResponse
     tokens: QuotaLineResponse
     cost_micros: int
+
+class CheckoutResponse(BaseModel):
+    checkout_url: str

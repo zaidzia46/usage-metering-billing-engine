@@ -11,6 +11,10 @@ def get_tenant_for_update(db: Session, tenant_id: int) -> Tenant | None:
     stmt = select(Tenant).where(Tenant.id == tenant_id).with_for_update()
     return db.scalar(stmt)
 
+def get_tenant(db: Session, tenant_id: int) -> Tenant | None:
+    """Plain read, no lock. Used by read-only endpoints like /usage."""
+    return db.get(Tenant, tenant_id)
+
 
 def find_event(db: Session, tenant_id: int, idempotency_key: str) -> UsageEvent | None:
     stmt = select(UsageEvent).where(

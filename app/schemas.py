@@ -32,3 +32,23 @@ class GenerateResponse(BaseModel):
 class ErrorResponse(BaseModel):
     error: str
     message: str
+
+class QuotaLineResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    used: int
+    limit: int
+    remaining: int
+
+
+class UsageResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    tenant_id: int
+    plan: str
+    subscription_status: str
+    period_start: datetime
+    period_end: datetime
+    api_calls: QuotaLineResponse
+    tokens: QuotaLineResponse
+    cost_micros: int

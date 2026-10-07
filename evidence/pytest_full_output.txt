@@ -1,0 +1,60 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.12.1, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\PMLS\Documents\Flyrank-AI-intern\assign\project\capstone\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\PMLS\Documents\Flyrank-AI-intern\assign\project\capstone
+plugins: anyio-4.15.1
+collecting ... collected 45 items
+
+tests/test_metering.py::test_same_key_twice_creates_one_event PASSED     [  2%]
+tests/test_metering.py::test_same_key_different_body_is_rejected PASSED  [  4%]
+tests/test_metering.py::test_tenants_can_use_the_same_key PASSED         [  6%]
+tests/test_metering.py::test_token_boundary_exact_limit_allowed_then_blocked PASSED [  8%]
+tests/test_metering.py::test_api_call_boundary_exact_limit_allowed_then_blocked PASSED [ 11%]
+tests/test_metering.py::test_blocked_request_records_nothing PASSED      [ 13%]
+tests/test_metering.py::test_pro_plan_over_limit_returns_429_with_retry_after PASSED [ 15%]
+tests/test_metering.py::test_retry_of_successful_request_at_limit_is_not_blocked PASSED [ 17%]
+tests/test_metering.py::test_past_due_subscription_returns_402 PASSED    [ 20%]
+tests/test_metering.py::test_cached_tokens_cannot_exceed_input PASSED    [ 22%]
+tests/test_metering.py::test_negative_tokens_rejected PASSED             [ 24%]
+tests/test_metering.py::test_missing_idempotency_key_rejected PASSED     [ 26%]
+tests/test_metering.py::test_unknown_tenant_returns_404 PASSED           [ 28%]
+tests/test_pricing.py::test_worked_example_total_cost PASSED             [ 31%]
+tests/test_pricing.py::test_quota_tokens_do_not_double_count_cached PASSED [ 33%]
+tests/test_pricing.py::test_cached_input_is_cheaper_than_fresh_input PASSED [ 35%]
+tests/test_pricing.py::test_reasoning_tokens_are_billed_like_output_tokens PASSED [ 37%]
+tests/test_pricing.py::test_cost_is_an_integer PASSED                    [ 40%]
+tests/test_pricing.py::test_rounding_happens_once_at_the_end PASSED      [ 42%]
+tests/test_pricing.py::test_zero_usage_costs_nothing PASSED              [ 44%]
+tests/test_pricing.py::test_cached_cannot_exceed_input PASSED            [ 46%]
+tests/test_pricing.py::test_negative_tokens_rejected PASSED              [ 48%]
+tests/test_pricing.py::test_negative_api_calls_rejected PASSED           [ 51%]
+tests/test_pricing.py::test_usage_endpoint_matches_pricing_rules PASSED  [ 53%]
+tests/test_reconcile.py::test_missed_webhook_is_repaired PASSED          [ 55%]
+tests/test_reconcile.py::test_second_run_changes_nothing PASSED          [ 57%]
+tests/test_reconcile.py::test_stripe_has_no_subscription_downgrades_pro PASSED [ 60%]
+tests/test_reconcile.py::test_paid_subscription_beats_newer_canceled_one PASSED [ 62%]
+tests/test_reconcile.py::test_failing_tenant_is_retried_then_reported PASSED [ 64%]
+tests/test_reconcile.py::test_one_failing_tenant_does_not_stop_the_others PASSED [ 66%]
+tests/test_reconcile.py::test_main_exits_nonzero_when_something_failed PASSED [ 68%]
+tests/test_usage.py::test_usage_is_isolated_per_tenant PASSED            [ 71%]
+tests/test_webhooks.py::test_forged_signature_returns_400_and_changes_nothing PASSED [ 73%]
+tests/test_webhooks.py::test_missing_signature_returns_400 PASSED        [ 75%]
+tests/test_webhooks.py::test_wrong_secret_returns_400 PASSED             [ 77%]
+tests/test_webhooks.py::test_tampered_body_is_rejected PASSED            [ 80%]
+tests/test_webhooks.py::test_checkout_completed_upgrades_free_to_pro PASSED [ 82%]
+tests/test_webhooks.py::test_unpaid_checkout_does_not_upgrade PASSED     [ 84%]
+tests/test_webhooks.py::test_replayed_event_is_processed_once PASSED     [ 86%]
+tests/test_webhooks.py::test_subscription_deleted_downgrades_to_free PASSED [ 88%]
+tests/test_webhooks.py::test_past_due_keeps_pro_but_blocks_generate_with_402 PASSED [ 91%]
+tests/test_webhooks.py::test_recovered_payment_restores_access PASSED    [ 93%]
+tests/test_webhooks.py::test_unknown_customer_is_ignored PASSED          [ 95%]
+tests/test_webhooks.py::test_unhandled_event_type_is_ignored PASSED      [ 97%]
+tests/test_webhooks.py::test_failed_processing_returns_500_and_can_be_retried PASSED [100%]
+
+============================== warnings summary ===============================
+venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\PMLS\Documents\Flyrank-AI-intern\assign\project\capstone\venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 45 passed, 1 warning in 3.16s ========================

@@ -80,7 +80,7 @@ Prices live in `app/pricing_config.py` (illustrative values, not a real provider
 Requires Python 3.12, Docker, and a free Stripe account in **test mode**.
 
 ```bash
-git clone <this repo> && cd <this repo>
+git clone https://github.com/zaidzia46/usage-metering-billing-engine && cd https://github.com/zaidzia46/usage-metering-billing-engine
 python -m venv venv
 source venv/bin/activate          # Windows: venv\Scripts\activate
 pip install -r requirements.txt
